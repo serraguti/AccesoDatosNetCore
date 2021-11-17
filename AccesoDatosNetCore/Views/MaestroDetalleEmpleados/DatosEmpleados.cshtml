@@ -1,0 +1,17 @@
+﻿@model List<Empleado>
+
+<h1>Maestro detalle empleados</h1>
+
+<ul class="list-group">
+    @foreach (Empleado emp in Model)
+    {
+        <li class="list-group-item">
+            @emp.Apellido
+            <a asp-controller="MaestroDetalleEmpleados"
+               asp-action="DetallesEmpleado"
+               asp-route-idempleado="@emp.IdEmpleado">
+                Detalles
+            </a>
+        </li>
+    }
+</ul>
