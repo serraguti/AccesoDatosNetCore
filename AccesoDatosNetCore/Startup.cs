@@ -28,9 +28,12 @@ namespace AccesoDatosNetCore
             //CREAMOS UN NUEVO EmpleadosContext PARA ENVIARLO 
             //A TODOS LOS CONTROLADORES QUE LO QUIERAN UTILIZAR
             String cadenaconexion = this.Configuration.GetConnectionString("hospitallocal");
-            EmpleadosContext context = new EmpleadosContext(cadenaconexion);
+            EmpleadosContext empleadocontext = new EmpleadosContext(cadenaconexion);
             //PONEMOS NUESTRO OBJETO DENTRO DEL ENTORNO DE NET CORE
-            services.AddTransient<EmpleadosContext>(contexto => context);
+            services.AddTransient<EmpleadosContext>(contexto => empleadocontext);
+
+            PlantillaContext plantillacontext = new PlantillaContext(cadenaconexion);
+            services.AddTransient<PlantillaContext>(contexto => plantillacontext);
 
             Bicicleta bici = new Bicicleta("BICI SIN PEDALES"
                 , "https://m.media-amazon.com/images/I/61uGn8SdAjS._AC_SS450_.jpg"

@@ -5,45 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using AccesoDatosNetCore.Models;
+using AccesoDatosNetCore.Data;
 
 namespace AccesoDatosNetCore.Controllers
 {
     public class PlantillasController : Controller
     {
-        String cadenaconexion;
-        SqlConnection cn;
-        SqlCommand com;
-        SqlDataReader reader;
+        PlantillaContext context;
 
-        public PlantillasController()
+        public PlantillasController(PlantillaContext context)
         {
-            this.cadenaconexion = @"Data Source=LOCALHOST;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=azure";
-            this.cn = new SqlConnection(this.cadenaconexion);
-            this.com = new SqlCommand();
-            this.com.Connection = this.cn;
-            this.com.CommandType = System.Data.CommandType.Text;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            String sql = "select * from plantilla";
-            this.com.CommandText = sql;
-            this.cn.Open();
-            this.reader = this.com.ExecuteReader();
-
-            List<Plantilla> listaplantilla = new List<Plantilla>();
-            while (this.reader.Read())
-            {
-                Plantilla plantilla = new Plantilla();
-                plantilla.IdPlantilla = (int)this.reader["EMPLEADO_NO"];
-                plantilla.Apellido = this.reader["APELLIDO"].ToString();
-                plantilla.Funcion = this.reader["FUNCION"].ToString();
-                plantilla.Salario = (int)this.reader["SALARIO"];
-                listaplantilla.Add(plantilla);
-            }
-
-            this.reader.Close();
-            this.cn.Close();
+            List<Plantilla> listaplantilla = this.context.GetPlantilla();
             return View(listaplantilla);
         }
     }
