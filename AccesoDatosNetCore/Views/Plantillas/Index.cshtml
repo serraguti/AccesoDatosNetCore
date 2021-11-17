@@ -1,0 +1,25 @@
+﻿@model List<Plantilla>
+
+<h1 style="color:blue">
+    Listado de plantilla
+</h1>
+
+<table class="table table-light">
+    <thead>
+        <tr>
+            <th>APELLIDO</th>
+            <th>FUNCION</th>
+            <th>SALARIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Plantilla plan in Model)
+        {
+            <tr>
+                <td>@plan.Apellido</td>
+                <td>@plan.Funcion</td>
+                <td>@plan.Salario</td>
+            </tr>
+        }
+    </tbody>
+</table>
