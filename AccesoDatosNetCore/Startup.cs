@@ -1,3 +1,4 @@
+using AccesoDatosNetCore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,10 @@ namespace AccesoDatosNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Bicicleta bici = new Bicicleta("BICI SIN PEDALES"
+                , "https://m.media-amazon.com/images/I/61uGn8SdAjS._AC_SS450_.jpg"
+                , 0, 2);
+            services.AddSingleton<Bicicleta>(bicicleta => bici);
             services.AddControllersWithViews();
         }
 
