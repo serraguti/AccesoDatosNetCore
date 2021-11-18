@@ -1,0 +1,28 @@
+﻿@model Empleado
+
+@{ 
+    List<Empleado> listaempleados = ViewBag.Empleados as List<Empleado>;
+}
+
+<h1>Detalle empleados</h1>
+<form method="post">
+    <label>Seleccione un empleado: </label>
+    <select name="idempleado" class="form-control">
+        @foreach (Empleado empleado in listaempleados)
+        {
+            <option value="@empleado.IdEmpleado">
+                @empleado.Apellido
+            </option>
+        }
+    </select>
+    <button class="btn btn-info">
+        Mostrar detalles empleado
+    </button>
+</form>
+<hr/>
+@if (Model != null)
+{
+    <h1>@Model.Apellido</h1>
+    <h2>Oficio: @Model.Oficio</h2>
+    <h2>Salario: @Model.Salario</h2>
+}
