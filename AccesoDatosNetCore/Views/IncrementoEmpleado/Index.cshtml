@@ -1,0 +1,31 @@
+﻿@model Empleado
+
+<h1>Incrementar salario empleado</h1>
+
+<form method="post">
+    <label>Id Empleado: </label>
+    <input type="number" name="idempleado"
+           class="form-control" required/><br/>
+    <label>Incremento salarial: </label>
+    <input type="number" name="incremento"
+           class="form-control" required/><br/>
+    <button class="btn btn-outline-dark">
+        Incrementar salario
+    </button>
+</form>
+<hr/>
+@if (Model != null)
+{
+    <h2 style="color:blue">@ViewBag.Mensaje</h2>
+    <ul class="list-group">
+        <li class="list-group-item">
+            Apellido: @Model.Apellido
+        </li>
+        <li class="list-group-item">
+            Oficio: @Model.Oficio
+        </li>
+        <li class="list-group-item list-group-item-info">
+            Salario: @Model.Salario
+        </li>
+    </ul>
+}

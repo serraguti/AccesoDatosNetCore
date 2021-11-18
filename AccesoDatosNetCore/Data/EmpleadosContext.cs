@@ -167,5 +167,21 @@ namespace AccesoDatosNetCore.Data
             this.com.Parameters.Clear();
             return listaempleados;
         }
+
+        public int IncrementarSalarioEmpleado(int idempleado, int incremento)
+        {
+            String sql = "update emp set salario = salario + @incremento "
+                + " where emp_no=@idempleado";
+            this.com.CommandText = sql;
+            SqlParameter pamincremento = new SqlParameter("@incremento", incremento);
+            SqlParameter pamidempleado = new SqlParameter("@idempleado", idempleado);
+            this.com.Parameters.Add(pamincremento);
+            this.com.Parameters.Add(pamidempleado);
+            this.cn.Open();
+            int resultado = this.com.ExecuteNonQuery();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            return resultado;
+        }
     }
 }
