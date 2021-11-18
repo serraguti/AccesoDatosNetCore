@@ -21,6 +21,11 @@ namespace AccesoDatosNetCore.Controllers
             return View(this.bici);
         }
 
+        public IActionResult Index2()
+        {
+            return View(this.bici);
+        }
+
         //HTTPPOST
         [HttpPost]
         public IActionResult Index(String accion)
