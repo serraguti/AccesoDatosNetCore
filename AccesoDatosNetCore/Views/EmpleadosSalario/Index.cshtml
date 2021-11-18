@@ -1,0 +1,33 @@
+﻿@model List<Empleado>
+
+<h1>Buscados empleados Salario</h1>
+
+<form method="post">
+    <label>Introduzca salario: </label>
+    <input type="number" name="salario"
+           class="form-control" required/>
+    <button class="btn btn-info">
+        Buscar empleados
+    </button>
+</form>
+<hr/>
+@if (Model != null)
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <td>Apellido</td>
+                <td>Salario</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Empleado emp in Model)
+            {
+                <tr>
+                    <td>@emp.Apellido</td>
+                    <td>@emp.Salario</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

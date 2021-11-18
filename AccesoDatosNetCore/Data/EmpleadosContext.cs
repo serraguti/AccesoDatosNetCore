@@ -89,5 +89,38 @@ namespace AccesoDatosNetCore.Data
             this.com.Parameters.Clear();
             return empleado;
         }
+
+        public List<Empleado> GetEmpleadosSalario(int salario)
+        {
+            String sql = "select * from emp where salario > @salario";
+            this.com.CommandText = sql;
+            SqlParameter pamsalario = new SqlParameter("@salario", salario);
+            this.com.Parameters.Add(pamsalario);
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<Empleado> listaempleados = new List<Empleado>();
+            while (this.reader.Read())
+            {
+                Empleado empleado = new Empleado();
+                empleado.IdEmpleado = (int)this.reader["EMP_NO"];
+                empleado.Apellido = this.reader["APELLIDO"].ToString();
+                empleado.Oficio = this.reader["OFICIO"].ToString();
+                empleado.Salario = (int)this.reader["SALARIO"];
+                listaempleados.Add(empleado);
+            }
+
+            this.reader.Close();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            if (listaempleados.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return listaempleados;
+            }
+        }
     }
 }
