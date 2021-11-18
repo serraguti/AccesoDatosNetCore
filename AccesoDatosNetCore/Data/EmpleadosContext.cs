@@ -122,5 +122,50 @@ namespace AccesoDatosNetCore.Data
                 return listaempleados;
             }
         }
+
+        public List<string> GetOficios()
+        {
+            String sql = "select distinct oficio from emp";
+            this.com.CommandText = sql;
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<string> listaoficios = new List<string>();
+            while (this.reader.Read())
+            {
+                String oficio = this.reader["OFICIO"].ToString();
+                listaoficios.Add(oficio);
+            }
+
+            this.reader.Close();
+            this.cn.Close();
+            return listaoficios;
+        }
+
+        public List<Empleado> GetEmpleadosOficio(String oficio)
+        {
+            String sql = "select * from emp where oficio=@oficio";
+            this.com.CommandText = sql;
+            SqlParameter pamoficio = new SqlParameter("@oficio", oficio);
+            this.com.Parameters.Add(pamoficio);
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<Empleado> listaempleados = new List<Empleado>();
+            while (this.reader.Read())
+            {
+                Empleado empleado = new Empleado();
+                empleado.IdEmpleado = (int)this.reader["EMP_NO"];
+                empleado.Apellido = this.reader["APELLIDO"].ToString();
+                empleado.Oficio = this.reader["OFICIO"].ToString();
+                empleado.Salario = (int)this.reader["SALARIO"];
+                listaempleados.Add(empleado);
+            }
+
+            this.reader.Close();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            return listaempleados;
+        }
     }
 }
