@@ -10,6 +10,7 @@ namespace AccesoDatosNetCore.Models
         public int IdPlantilla { get; set; }
         public String Apellido { get; set; }
         public String Funcion { get; set; }
+        public String Turno { get; set; }
         public int Salario { get; set; }
     }
 }

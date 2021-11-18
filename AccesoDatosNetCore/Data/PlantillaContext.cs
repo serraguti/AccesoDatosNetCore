@@ -35,6 +35,7 @@ namespace AccesoDatosNetCore.Data
                 plantilla.IdPlantilla = (int)this.reader["EMPLEADO_NO"];
                 plantilla.Apellido = this.reader["APELLIDO"].ToString();
                 plantilla.Funcion = this.reader["FUNCION"].ToString();
+                plantilla.Turno = this.reader["T"].ToString();
                 plantilla.Salario = (int)this.reader["SALARIO"];
                 listaplantilla.Add(plantilla);
             }
@@ -42,6 +43,41 @@ namespace AccesoDatosNetCore.Data
             this.reader.Close();
             this.cn.Close();
             return listaplantilla;
+        }
+
+        public List<Plantilla> GetPlantillaTurno(String turno)
+        {
+            String sql = "select * from plantilla where t=@turno";
+            this.com.CommandText = sql;
+            SqlParameter pamturno = new SqlParameter("@turno", turno);
+            this.com.Parameters.Add(pamturno);
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<Plantilla> listaplantilla = new List<Plantilla>();
+            while (this.reader.Read())
+            {
+                Plantilla plan = new Plantilla();
+                plan.IdPlantilla = (int)this.reader["EMPLEADO_NO"];
+                plan.Apellido = this.reader["APELLIDO"].ToString();
+                plan.Funcion = this.reader["FUNCION"].ToString();
+                plan.Turno = this.reader["T"].ToString();
+                plan.Salario = (int)this.reader["SALARIO"];
+                listaplantilla.Add(plan);
+            }
+
+            //SALIR
+            this.reader.Close();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            if (listaplantilla.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return listaplantilla;
+            }
         }
     }
 }
