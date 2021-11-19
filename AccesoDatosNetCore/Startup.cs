@@ -35,6 +35,9 @@ namespace AccesoDatosNetCore
             PlantillaContext plantillacontext = new PlantillaContext(cadenaconexion);
             services.AddTransient<PlantillaContext>(contexto => plantillacontext);
 
+            EnfermosContext enfermosContext = new EnfermosContext(cadenaconexion);
+            services.AddTransient<EnfermosContext>(contexto => enfermosContext);
+
             Bicicleta bici = new Bicicleta("BICI SIN PEDALES"
                 , "https://m.media-amazon.com/images/I/61uGn8SdAjS._AC_SS450_.jpg"
                 , 0, 2);
