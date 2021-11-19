@@ -1,7 +1,7 @@
 ﻿@model List<Plantilla>
 
 @{ 
-    List<string> listafunciones = ViewBag.Funciones as List<string>
+    List<string> listafunciones = ViewBag.Funciones as List<string>;
 }
 
 <h1>Incrementar salario plantilla funcion</h1>
@@ -30,6 +30,7 @@
                 <th>Apellido</th>
                 <th>Función</th>
                 <th>Salario</th>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,11 @@
                     <td>@plantilla.Apellido</td>
                     <td>@plantilla.Funcion</td>
                     <td style="background-color:yellow">@plantilla.Salario</td>
+                    <td>
+                        <button class="btn btn-danger">
+                            Eliminar enfermo
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
