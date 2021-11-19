@@ -79,5 +79,52 @@ namespace AccesoDatosNetCore.Data
                 return listaplantilla;
             }
         }
+
+        public List<string> GetFunciones()
+        {
+            String sql = "select distinct funcion from plantilla";
+            this.com.CommandText = sql;
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<String> funciones = new List<string>();
+            while (this.reader.Read())
+            {
+                string funcion = this.reader["FUNCION"].ToString();
+                funciones.Add(funcion);
+            }
+
+            this.reader.Close();
+            this.cn.Close();
+            return funciones;
+        }
+
+        public List<Plantilla> GetPlantillaFunciones(string funcion)
+        {
+            String sql = "select * from plantilla where funcion=@funcion";
+            this.com.CommandText = sql;
+            SqlParameter pamfuncion = new SqlParameter("@funcion", funcion);
+            this.com.Parameters.Add(pamfuncion);
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+
+            List<Plantilla> listaplantilla = new List<Plantilla>();
+            while (this.reader.Read())
+            {
+                Plantilla plantilla = new Plantilla();
+                plantilla.IdPlantilla = (int)this.reader["EMPLEADO_NO"];
+                plantilla.Apellido = this.reader["APELLIDO"].ToString();
+                plantilla.Funcion = this.reader["FUNCION"].ToString();
+                plantilla.Salario = (int)this.reader["SALARIO"];
+                plantilla.Turno = this.reader["T"].ToString();
+                listaplantilla.Add(plantilla);
+            }
+
+            this.reader.Close();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            return listaplantilla;
+        }
+
     }
 }
