@@ -126,5 +126,20 @@ namespace AccesoDatosNetCore.Data
             return listaplantilla;
         }
 
+        public int UpdatePlantillaFuncion(string funcion, int incremento)
+        {
+            String sql = "update plantilla set salario=salario + @incremento "
+                + " where funcion=@funcion";
+            this.com.CommandText = sql;
+            SqlParameter pamincremento = new SqlParameter("@incremento", incremento);
+            SqlParameter pamfuncion = new SqlParameter("@funcion", funcion);
+            this.com.Parameters.Add(pamincremento);
+            this.com.Parameters.Add(pamfuncion);
+            this.cn.Open();
+            int afectados = this.com.ExecuteNonQuery();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            return afectados;
+        }
     }
 }
