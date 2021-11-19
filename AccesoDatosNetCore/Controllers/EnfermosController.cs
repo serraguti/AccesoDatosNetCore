@@ -17,6 +17,21 @@ namespace AccesoDatosNetCore.Controllers
             this.context = context;
         }
 
+        //LOS PARAMETROS OPCIONALES LOS RECIBIREMOS COMO STRING
+        //AUNQUE SEAN NUMEROS
+        public IActionResult EliminarEnfermosGet(string inscripcion)
+        {
+            //DEBEMOS PREGUNTAR SI LA INSCRIPCION HA VENIDO O NO...
+            if (inscripcion != null)
+            {
+                //PODEMOS ELIMINAR
+                int eliminados = this.context.EliminarEnfermo(int.Parse(inscripcion));
+                ViewBag.Mensaje = "Eliminados: " + eliminados;
+            }
+            List<Enfermo> listaenfermos = this.context.GetEnfermos();
+            return View(listaenfermos);
+        }
+
         public IActionResult EliminarEnfermosFormulario()
         {
             List<Enfermo> listaenfermos = this.context.GetEnfermos();
