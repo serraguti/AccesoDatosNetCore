@@ -1,0 +1,28 @@
+﻿@model List<Plantilla>
+
+<h1>Plantilla hospital</h1>
+
+<a asp-controller="Hospitales"
+   asp-action="Menu">
+    Volver al listado
+</a>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Apellido</th>
+            <th>Función</th>
+            <th>Salario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Plantilla plan in Model)
+        {
+            <tr>
+                <td>@plan.Apellido</td>
+                <td>@plan.Funcion</td>
+                <td>@plan.Salario</td>
+            </tr>
+        }
+    </tbody>
+</table>

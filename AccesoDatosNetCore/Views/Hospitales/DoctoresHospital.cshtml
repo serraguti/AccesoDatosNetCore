@@ -1,0 +1,28 @@
+﻿@model List<Doctor> 
+
+<h1>Doctores hospital</h1>
+
+<a asp-controller="Hospitales"
+   asp-action="Menu">
+    Volver al listado
+</a>
+
+<table class="table table-danger">
+    <thead>
+        <tr>
+            <th>Apellido</th>
+            <th>Especialidad</th>
+            <th>Salario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Doctor doc in Model)
+        {
+            <tr>
+                <td>@doc.Apellido</td>
+                <td>@doc.Especialidad</td>
+                <td>@doc.Salario</td>
+            </tr>
+        }
+    </tbody>
+</table>

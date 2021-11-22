@@ -25,9 +25,10 @@ namespace AccesoDatosNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //CREAMOS UN NUEVO EmpleadosContext PARA ENVIARLO 
-            //A TODOS LOS CONTROLADORES QUE LO QUIERAN UTILIZAR
             String cadenaconexion = this.Configuration.GetConnectionString("hospitallocal");
+            HospitalContext hospitalContext = new HospitalContext(cadenaconexion);
+            services.AddTransient<HospitalContext>(context => hospitalContext);
+
             EmpleadosContext empleadocontext = new EmpleadosContext(cadenaconexion);
             //PONEMOS NUESTRO OBJETO DENTRO DEL ENTORNO DE NET CORE
             services.AddTransient<EmpleadosContext>(contexto => empleadocontext);

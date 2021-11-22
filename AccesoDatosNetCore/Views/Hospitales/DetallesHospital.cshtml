@@ -1,0 +1,34 @@
+﻿@model Hospital
+ 
+<h1>Detalles hospital</h1>
+
+<a asp-controller="Hospitales"
+   asp-action="Menu">
+    Volver al listado
+</a>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Nombre: @Model.Nombre
+    </li>    
+    <li class="list-group-item">
+        Dirección: @Model.Direccion
+    </li>
+    <li class="list-group-item">
+        Teléfono: @Model.Telefono
+    </li>
+    <li class="list-group-item">
+        <a class="btn btn-success"
+           asp-controller="Hospitales"
+           asp-action="DoctoresHospital"
+           asp-route-idhospital="@Model.IdHospital">
+            Mostrar doctores
+        </a>
+        <a class="btn btn-info"
+           asp-controller="Hospitales"
+           asp-action="PlantillaHospital"
+           asp-route-idhospital="@Model.IdHospital">
+            Mostrar plantilla
+        </a>
+    </li>
+</ul>

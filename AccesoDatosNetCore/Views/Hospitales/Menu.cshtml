@@ -1,0 +1,17 @@
+﻿@model List<Hospital>
+
+<h1>Menu hospitales</h1>
+
+<ul class="list-group">
+    @foreach (Hospital h in Model)
+    {
+        <li class="list-group-item">
+            @h.Nombre | 
+            <a asp-controller="Hospitales"
+               asp-action="DetallesHospital"
+               asp-route-idhospital="@h.IdHospital">
+                Detalles
+            </a>
+        </li>
+    }
+</ul>
